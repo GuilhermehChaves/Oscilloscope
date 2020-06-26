@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Audio Frequency Analysis</title>
+    <style>
+        #oscilloscope {
+            border: 1px solid rgb(189, 195, 199);
+            border-radius: 10px;
+        }
+
+        form, #playSound {
+            margin-left: 73px;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(52, 73, 94);">
+    <center>
+        <canvas id="oscilloscope" width="1200" height="512"></canvas>
+    </center>
+    <br />
+    <button id="playSound">Play</button>
+
+    <script type="text/javascript">
+        const WIDTH = 1200;
+        const HEIGHT = 512;
+
+        const oscilloscope = document.getElementById('oscilloscope');
+        const oscilloscopeCtx = oscilloscope.getContext('2d');
+        oscilloscopeCtx.fillStyle = 'rgb(0, 0, 0)';
+        oscilloscopeCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    </script>
+    <script type="text/javascript" src="./js/audio.js"></script>
+</body>
+
+</html>
