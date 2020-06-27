@@ -1,32 +1,41 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-var context = new AudioContext();
-var analyser = context.createAnalyser();
-var distortion = context.createWaveShaper();
-var source = context.createBufferSource();
+var context;
+var analyser;
+var distortion;
+var source;
 
-(function loadSound(url) {
+const URL = 'http://localhost:8000/audios/see_you_again.mp3';
+var playing = false;
+
+function onLoadError() {
+    alert('Error while loading song');
+}
+
+const startButton = document.querySelector('#playSound');
+startButton.onclick = function () {
+    context = new AudioContext();
+    analyser = context.createAnalyser();
+    distortion = context.createWaveShaper();
+    source = context.createBufferSource();
+
     var request = new XMLHttpRequest();
-    request.open('GET', url, true);
+    request.open('GET', URL, true);
     request.responseType = 'arraybuffer';
     request.onload = function () {
         context.decodeAudioData(request.response, function (buffer) {
-            playButton(buffer);
-
+            playing = true;
+            playSound(buffer);
         }, onLoadError)
     }
 
     request.send();
-})('http://localhost:8000/audios/dance_monkeys.mp3');
-
-function playButton(buffer) {
-    const button = document.querySelector('#playSound');
-    button.onclick = function () {
-        playSound(buffer);
-    }
 }
 
-function onLoadError() {
-    alert('Error while loading song');
+const stopButton = document.querySelector('#stopSound');
+stopButton.onclick = function () {
+    if (playing) {
+        source.stop(0);
+    }
 }
 
 async function playSound(buffer) {

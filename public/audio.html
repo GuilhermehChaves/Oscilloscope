@@ -20,8 +20,9 @@
         <canvas id="oscilloscope" width="1200" height="512"></canvas>
     </center>
     <br />
-    <button id="playSound">Play</button>
-    <button id="stopSound">Stop</button>
+    <audio controls style="margin-left: 73px; width: 90%;">
+        <source src="http://localhost:8000/audios/last_breath.mp3">
+    </audio>
 
     <script type="text/javascript">
         const WIDTH = 1200;
@@ -32,7 +33,7 @@
         oscilloscopeCtx.fillStyle = 'rgb(0, 0, 0)';
         oscilloscopeCtx.fillRect(0, 0, WIDTH, HEIGHT);
     </script>
-    <script type="text/javascript" src="./js/audio.js"></script>
+    <script type="text/javascript" src="./js/tag.js"></script>
 </body>
 
 </html>
